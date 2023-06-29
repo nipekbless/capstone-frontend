@@ -11,7 +11,8 @@ document.getElementById('shortenButton').addEventListener('click', async () => {
         });
 
         const data = await response.json();
-        const shortenedUrl = data.shortUrl;
+        const shortenedUrl = data.completeUrl;
+        console.log(data)
 
         document.getElementById('urlValue').textContent = shortenedUrl;
     } catch (error) {
