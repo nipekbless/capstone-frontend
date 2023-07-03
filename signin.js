@@ -1,41 +1,42 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-  
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-  
-    // Send a request to the backend API for user authentication
-    fetch('https://trim-q1wc.onrender.com/Api/signin', {
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  try {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('https://trim-q1wc.onrender.com/Api/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email: email, password: password })
-    })
-      .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Error: ' + response.status);
-        }
-      })
-      .then(function(data) {
-        // Store the JWT token in the browser's local storage
-        localStorage.setItem('jwtToken', data.token);
-  
-        // Redirect the user to the dashboard page
-        window.location.href = 'dashboard.html';
-      })
-      .catch(function(error) {
-        // Handle errors
-        console.error(error);
-      });
-  });
+      body: JSON.stringify({ email, password })
+    });
 
-// redirect new user to sigup page 
-  
-  function redirectToSignup() {
-    window.location.href = 'signup.html';
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('jwtToken', data.token);
+      window.location.href = 'dashboard.html';
+    } else {
+      const data = await response.json();
+      const userNotFound = data.message;
+      console.log(data.message);
+      document.getElementById('userNotFound').textContent = userNotFound;
+      throw new Error('Error: ' + response.status);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+function redirectToSignup() {
+  window.location.href = 'signup.html';
 }
 
 document.getElementById('signupButton').addEventListener('click', redirectToSignup);
+
+function redirectToResetPassword() {
+  window.location.href = 'resetPasword.html';
+}
+
+document.getElementById('resetPassword').addEventListener('click', redirectToResetPassword);
