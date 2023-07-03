@@ -6,9 +6,6 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     var lastname = document.getElementById('lastname').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    
-
-    // Perform any client-side validation if needed
 
     // Create an object with the form data
     var formData = {
@@ -19,7 +16,7 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     };
 
     // Perform a fetch request to your backend API
-    fetch('https://trim-q1wc.onrender.com/signup', {
+    fetch('https://trim-q1wc.onrender.com/Api/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,12 +42,12 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
         document.getElementById('email').value = '';
         document.getElementById('password').value = '';
 
-        // Display a success message or redirect to another page
-        alert('Signup successful!');
+        // Redirect to the signin.html page
+        window.location.href = 'signin.html';
     })
     .catch(function(error) {
         // Error occurred during the request
         console.error('Signup failed:', error);
-        alert('Signup failed. Please try again.');
+        document.getElementById('success').textContent = 'Signup failed. Please try again.';
     });
 });

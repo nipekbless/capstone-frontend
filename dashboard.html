@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div id="logout">
+        <button id="logoutButton">Logout</button>
+      </div>
+      
+    <div class="container">
+        <div id="shorten-link">
+        <h2>Shorten Link</h2>
+        <form id="shortenLinkForm">
+            <input type="text" id="longUrl" placeholder="Long URL" required>
+            <button type="submit">Generate Short Link</button>
+        </form>
+        <p id="shortenedLink">Short URL: <span id="linkValue"></span></p>
+        </div>
+
+        <div id="Customise-url">
+            <h2>Customise Url</h2>
+            <form id="custoiseLinkForm">
+                <p>trim-q1wc.onrender.com/<input type="text" id="desiredTag" placeholder="desired tag" required></p>
+                <button type="submit">Generate New Url</button>
+            </form>
+            <p id="newLink">New URL: <span id="newLinkValue"></span></p>
+        </div>
+        
+        <div id="generate-qrcode">
+        <h2>Generate QR Code</h2>
+        <form id="generateQRCodeForm">
+            <input type="text" id="qrCodeData" placeholder="Data for QR Code" required>
+            <button type="submit">Generate QR Code</button>
+        </form>
+        <img src="" alt="" id="generated-qrcode">
+        </div>
+
+        <div id="created-links">
+        <button>Get all urls</button>
+        <h2>Created Links</h2>
+        <ul id="linkList"></ul>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
