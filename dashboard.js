@@ -61,7 +61,8 @@ async function generateShortLink(longUrl) {
 async function generateCustomURL(desiredTag) {
     try {
       // Get the value of the 'shortId' parameter from the URL
-      const url = window.document.getElementById("linkValue").innerText
+      const url = document.getElementById("shortLink").value
+      console.log(url)
       const shortId = url.split("/")[1];
       console.log(shortId);
   
@@ -76,14 +77,15 @@ async function generateCustomURL(desiredTag) {
           body: JSON.stringify({ customUrl: desiredTag }),
        
         }
-      );   console.log(body)
+      ); 
   
       if (response.ok) {
         const data = await response.json();
         console.log(data)
+        const customisedUrl = data.replace("https://", "");;
         var newLink = document.getElementById("newLink");
         var newLinkValue = document.getElementById("newLinkValue");
-        newLinkValue.textContent = data.customURL;
+        newLinkValue.textContent = customisedUrl;
         newLink.style.display = "block";
       } else {
         throw new Error("Error: " + response.status);

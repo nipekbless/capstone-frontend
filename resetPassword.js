@@ -20,7 +20,7 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async fu
         window.location.href = 'signin.html';
       } else {
         const data = await response.json();
-        const userNotFound = data.message;
+        const userNotFound = 'user not found';
         console.log(data.message);
         document.getElementById('message').innerHTML = userNotFound;
         throw new Error('Error: ' + response.status);
