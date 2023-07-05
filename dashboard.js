@@ -1,31 +1,79 @@
 // Function to fetch the list of created links
-function fetchLinks() {
-  fetch("https://trim-q1wc.onrender.com/Api/getuserurls", {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("jwtToken"),
-    },
-  })
-    .then(function (response) {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Error: " + response.status);
-      }
-    })
-    .then(function (data) {
-      // Update the link list
-      var linkList = document.getElementById("linkList");
-      linkList.innerHTML = data;
-
-      // data.forEach(function(link) {
-      //   var li = document.createElement('li');
-      //   li.textContent = link;
-      //   linkList.appendChild(li);
-      // });
-    })
-    .catch(function (error) {
-      console.error(error);
+async function fetchLinks() {
+  try {
+    const response = await fetch("https://trim-q1wc.onrender.com/Api/getuserurls", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwtToken"),
+      },
     });
+
+    if (!response.ok) {
+      throw new Error("Error: " + response.status);
+    }
+
+    const data = await response.json();
+
+    // Update the link list
+    var linkList = document.getElementById("linkList");
+    linkList.innerHTML = ""; // Clear existing list
+  console.log(data)
+    var urlData = data.urlInfo
+    for (const info of urlData) {
+      var originalURL = info.originalURL;
+      var shortUrl = info.shortUrl;
+      var createdAt = info.createdAt;
+      var clicks = info.clicks;
+      var referringSources = info.referringSources;
+      var lastClickedAt = info.lastClickedAt;
+
+      // Create a container element for link details
+      var linkDetails = document.createElement("div");
+
+      // Create paragraph elements for each property
+      var originalUrlParagraph = document.createElement("p");
+      originalUrlParagraph.textContent = "Original URL: " + originalURL;
+
+      var shortUrlParagraph = document.createElement("p");
+      shortUrlParagraph.textContent = "Short URL: " + shortUrl;
+
+      var createdAtParagraph = document.createElement("p");
+      createdAtParagraph.textContent = "Created At: " + createdAt;
+
+      var clicksParagraph = document.createElement("p");
+      clicksParagraph.textContent = "Clicks: " + clicks;
+
+     // Create referring sources paragraph only if the array is not empty
+        if (referringSources.length > 0) {
+      var referringSourcesParagraph = document.createElement("p");
+      referringSourcesParagraph.textContent =
+        "Referring Sources: " + referringSources.join(", ");
+        linkDetails.appendChild(referringSourcesParagraph);
+        }
+
+      var lastClickedAtParagraph = document.createElement("p");
+      if (lastClickedAt !== undefined) {
+      lastClickedAtParagraph.textContent = "Last Clicked At: " + lastClickedAt;}
+
+      // Append the paragraph elements to the link details container
+      linkDetails.appendChild(originalUrlParagraph);
+      linkDetails.appendChild(shortUrlParagraph);
+      linkDetails.appendChild(createdAtParagraph);
+      linkDetails.appendChild(clicksParagraph);
+     
+      linkDetails.appendChild(lastClickedAtParagraph);
+
+      // Create a list item element
+      var listItem = document.createElement("li");
+
+      // Append the link details container to the list item
+      listItem.appendChild(linkDetails);
+
+      // Append the list item to the link list
+      linkList.appendChild(listItem);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // Function to generate a short link
@@ -97,25 +145,29 @@ async function generateCustomURL(desiredTag) {
   
 
 // Function to generate a QR code
-function generateQRCode(data) {
-  fetch("https://trim-q1wc.onrender.com/Api/generateQRCode", {
+function generateQRCode(QrCodeData) {
+  fetch("https://trim-q1wc.onrender.com/Api/qrcode", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("jwtToken"),
     },
-    body: JSON.stringify({ data: data }),
+    body: JSON.stringify({ 
+      shortUrl: "https://" + QrCodeData }),
   })
     .then(function (response) {
       if (response.ok) {
-        return response.blob();
+        return response.json();
       } else {
         throw new Error("Error: " + response.status);
       }
     })
     .then(function (data) {
+      console.log(data)
+        // Retrieve the QR code link from the response
+      const qrCodeLink = data.qrCodeUrl
       var qrCodeImage = document.getElementById("generated-qrcode");
-      qrCodeImage.src = URL.createObjectURL(data);
+      qrCodeImage.src = qrCodeLink;
       qrCodeImage.style.display = "block";
     })
     .catch(function (error) {
@@ -163,8 +215,8 @@ document
     fetchLinks();
   });
 
-// Fetch the list of created links when the dashboard page loads
-fetchLinks();
+// // Fetch the list of created links when the dashboard page loads
+// fetchLinks();
 
 // Function to log out the user
 function logout() {
