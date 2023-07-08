@@ -10,12 +10,18 @@ document.getElementById('shortenButton').addEventListener('click', async () => {
             body: JSON.stringify({ originalURL: longUrl })
         });
 
+       if(response.ok){
         const data = await response.json();
         const shortenedUrl = data.completeUrl;
         console.log(data)
 
         document.getElementById('urlValue').textContent = shortenedUrl;
+       }
+
+       
+
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:', error);const invalidUrl = "Invalid! Please check the URL"
+       document.getElementById('urlValue').textContent = invalidUrl
     }
 });

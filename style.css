@@ -52,8 +52,10 @@
     display: block;
   justify-content: center; /* Horizontally center the content */
   align-items: center; /* Vertically center the content */
-  height: 100vh; /* Set the container height */
+  height: 60vh; /* Set the container height */
   padding-top: 5%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
   }
 
   #Greetings{
@@ -111,3 +113,27 @@ input[type="text"]{
 #shortenButton:hover{
  background-color: rgb(210, 22, 22);
 }
+
+#shortenedUrl{
+    text-align: center;
+    font-size: 15px;
+}
+
+#direct {
+    text-align: center;
+    color: rgb(144, 47, 50);
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+#features{
+    display: flex;
+    padding-top: 10%;
+    justify-content: center;
+}
+
+#qrcode,#analytics,
+#Customise{
+    height: 100%;
+}
+
