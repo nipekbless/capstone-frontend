@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+  }
+  
+  header {
+    background-image: linear-gradient(to right, rgba(212, 25, 25, 0.849), rgb(86, 65, 65));
+    height: 100px;
+  }
+  
+  #logo {
+    font-size: 30px;
+    padding: 30px;
+    font-style: italic;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: aliceblue;
+  }
+  
+  #navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #authentication {
+    display: flex;
+    padding-right: 100px;
+  }
+  
+  #signin,
+  #signup {
+    padding: 0;
+    margin-left: 10px;
+    color: white;
+  }
+
+#signinLink:hover,
+#signupLink:hover{
+    color: black;
+  }
+
+  #signinLink,
+  #signupLink {
+    padding: 0;
+    margin-left: 10px;
+    color: white;
+    list-style-type: none;
+    text-decoration: none; /* Remove underline */
+   
+  }
+
+  #generateUrlContainer{
+    display: block;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  height: 100vh; /* Set the container height */
+  padding-top: 10%;
+  }
+
+  #Greetings{
+    color: rgb(120, 10, 10);
+    text-align: center;
+  }
+
+  #Welcome{
+    color:rgb(120, 10, 10) ;
+    text-align: center;
+    padding-top: 10%;
+  }
+
+#Intro{
+    color:rgb(120, 10, 10) ;
+    text-align: center;
+    padding-bottom: 0%;
+}
+
+#introduction{
+    padding-top: 10%;
+    padding-bottom: 0%;
+}
+
+#generateUrl{
+
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+#shortenedUrl{
+    display: block;
+    margin-bottom: 10px;
+}
+  

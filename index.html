@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head >
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
     <title>Scissors</title>
 </head>
 <body>
-    <header>
-        <ul>
-            <li><a href="signin.html">Sign</a></li>
-            <li><a href="signup.html">Signup</a></li>
-        </ul>
+    <header id="navigation">
+        <p id="logo">SCISORS</p>
+        <div id="authentication">
+            <p id="signin"><a  id="signinLink"href="signin.html">Signin</a></p>
+            <p id="signup"><a id="signupLink" href="signup.html">Signup</a></p>
+        </div>
     </header>
+    <div id="introduction">
+    <h1 id="Greetings">Hi!</h1><br>
+    <h1 id="Welcome">Welcome to scisors app.</h1><br>
+    <h2 id="Intro">This app allows you to shorten a long url.</h2>
+    </div>
     <div id="generateUrlContainer">
         <form id="generateUrl">
             <input type="text" id="longUrlInput" placeholder="Type your long URL">
